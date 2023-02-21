@@ -1,0 +1,63 @@
+<div>
+    <table class="table table-light">
+      <thead>
+        <tr>
+          <th scope="col">Lastname</th>
+          <th scope="col">Firstname</th>
+          <th scope="col">Phone</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let indi of addressBook">
+          <td>{{ indi.lastname }}</td>
+          <td>{{ indi.firstname }}</td>
+          <td>{{ indi.phone }}</td>
+          <td>
+            <button (click)="showUpdateForm(indi)" class="btn btn-primary" style="margin: 5px">Update</button>
+            <button (click)="deletePerson(indi.id)" class="btn btn-danger" style="margin: 5px">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="isUpdateActivated" style="margin-top: 50px; margin-left: 50px;">
+      <h4>Update Person</h4>
+      <form (ngSubmit)="updatePerson(updateForm)" #updateForm="ngForm">
+        <div class="form-group">
+          <label for="name">Last Name</label>
+          <input
+            type="text"
+            id="lastname"
+            name="lastname"
+            class="form-control"
+            required
+            [(ngModel)]="personToBeUpdated.lastname"
+            style="width: 400px"/>
+        </div>
+        <div class="form-group">
+          <label for="name">FirstName</label>
+          <input
+            type="text"
+            id="firstname"
+            name="firstname"
+            class="form-control"
+            required
+            [(ngModel)]="personToBeUpdated.firstname"
+            style="width: 400px"/>
+        </div>
+        <div class="form-group">
+          <label for="side">Phone</label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            class="form-control"
+            required
+            [(ngModel)]="personToBeUpdated.phone"
+            style="width: 400px"/>
+        </div>
+        <button [disabled]="updateForm.invalid" class="btn btn-primary" type="submit">Update Person</button>
+      </form>
+    </div>
+  </div>
